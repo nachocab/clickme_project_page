@@ -27,19 +27,20 @@
         <section id="main_content">
 
         <p>
-        <strong>Clickme</strong> is an R package that lets you create interactive visualizations the way you are used to creating static plots in R. Call the clickme function and specify a <strong>template</strong> (only points or now), some <strong>data</strong>, and any number of <strong>parameters</strong> and a visualization will open in your browser in all its interactive goodness.
+        <strong>Clickme</strong> is an R package that makes creating interactive visualizations as easy as producing static plots in R. Call the clickme function and specify a <strong>template</strong> (only points for now), some <strong>data</strong>, any number of optional <strong>parameters</strong> and a visualization will open in your browser for your interactive pleasure.
         </p>
 
         <h3>Example</h3>
 
-        <!-- clickme(points, rbeta(500, 1, 10), rbeta(500, 1, 10), names = sample(letters, 500, r = T), color_groups = sample(LETTERS[1:3], 500, r = T), title = "Zoom Search Hover Click", file_path = "/Users/nacho/Documents/Code/Rprojects/clickme_project_page/clickme/examples/letter-points.html") -->
+        <!-- clickme(points, rbeta(100, 1, 10), rbeta(100, 1, 10), names = sample(letters, 100, r = T), color_groups = sample(LETTERS[1:3], 100, r = T), title = "Zoom Search Hover Click", file_path = "/Users/nacho/Documents/Code/Rprojects/clickme_project_page/clickme/examples/letter-points.html") -->
         <iframe width = "1150" height = "850" src="clickme/examples/letter-points.html"> </iframe>
 
         <hr>
 
         <h3>Install</h3>
 
-<pre><code>install.packages("devtools")
+<pre><code># Run this in your R console
+install.packages("devtools")
 library(devtools)
 
 install_github("clickme", "nachocab")
@@ -48,11 +49,11 @@ library(clickme)
 
         <h3>Use</h3>
 
-    <pre><code># simple
+    <pre><code># simple example
 clickme(points, 1:10)
 
-# fancy
-n <- 500
+# fancy example
+n <- 100
 clickme(points,
     x = rbeta(n, 1, 10), y = rbeta(n, 1, 10),
     names = sample(letters, n, r = T),
