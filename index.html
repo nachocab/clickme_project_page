@@ -22,19 +22,22 @@
           <h2>Interactive R plots</h2>
         </header>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/nachocab/clickme" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
         <hr>
 
         <section id="main_content">
 
-        <iframe width = "1050" height = "850" src="clickme/letter-points.html"> </iframe>
+        <p>
+        <strong>Clickme</strong> is an R package that lets you create interactive visualizations the way you are used to creating static plots in R. Call the clickme function and specify a <strong>template</strong> (only points or now), some <strong>data</strong>, and any number of <strong>parameters</strong> and a visualization will open in your browser in all its interactive goodness.
+        </p>
 
-<div class="span6">
+        <h3>Example</h3>
 
-    <h4>Install</h4>
+        <!-- clickme(points, rbeta(500, 1, 10), rbeta(500, 1, 10), names = sample(letters, 500, r = T), color_groups = sample(LETTERS[1:3], 500, r = T), title = "Zoom Search Hover Click", file_path = "/Users/nacho/Documents/Code/Rprojects/clickme_project_page/clickme/examples/letter-points.html") -->
+        <iframe width = "1150" height = "850" src="clickme/examples/letter-points.html"> </iframe>
+
+        <hr>
+
+        <h3>Install</h3>
 
 <pre><code>install.packages("devtools")
 library(devtools)
@@ -43,11 +46,24 @@ install_github("clickme", "nachocab")
 library(clickme)
 </code></pre>
 
-    <h4>Use</h4>
-    <pre><code>clickme(points, rnorm(26), rnorm(26), names = letters)
+        <h3>Use</h3>
+
+    <pre><code># simple
+clickme(points, 1:10)
+
+# fancy
+n <- 500
+clickme(points,
+    x = rbeta(n, 1, 10), y = rbeta(n, 1, 10),
+    names = sample(letters, n, r = T),
+    color_groups = sample(LETTERS[1:3], n, r = T),
+    title = "Zoom Search Hover Click")
 </code></pre>
 
-</div>
+        </section>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/nachocab/clickme" id="view-on-github" class="button"><span>View on GitHub</span></a>
         </section>
 
         <footer>
