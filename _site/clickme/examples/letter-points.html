@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <base target="_blank"> <!-- open all links on a new tab -->
+
+    <title>Zoom Search Hover Click</title>
+
+    <link href="clickme_assets/clickme.css" rel="stylesheet">
+<link href="clickme_assets/tooltip.css" rel="stylesheet">
+<link href="clickme_assets/Points/points.css" rel="stylesheet">
+<script src="clickme_assets/d3.v3.2.7.js"></script>
+<script src="clickme_assets/jquery.v1.8.3.min.js"></script>
+<script src="clickme_assets/bootstrap-tooltip.v2.3.0.js"></script>
+<script src="clickme_assets/d3_aux.js"></script>
+  </head>
+
+  <body>
+    <div class="g-search">
+        <input type="text" placeholder="Search…">
+        <button style="display:none;" class="g-search-clear">X</button>
+    </div>
+    <script type="text/javascript">
+(function() {
+  var clip, color_legend_counts, color_scale, color_title, data, distance_between_show_names_and_color_groups, g_color_group_keys, g_points, g_toggle_names, keyuped, mouseout, mouseover, opacity, plot, point_names, points, radius, redraw, search, search_clear, search_input, sidebar, toggle_names, toggle_points, transform;
+
+  data = [{"x":0.139924605719685,"y":0.00385705171129466,"point_name":"h","color_group":"C"},
+{"x":0.12313042843765,"y":0.0819676812262969,"point_name":"b","color_group":"C"},
+{"x":0.120916575072289,"y":0.0752734968146423,"point_name":"z","color_group":"C"},
+{"x":0.0310186269936072,"y":0.0249465368947141,"point_name":"h","color_group":"C"},
+{"x":0.409015252835207,"y":0.053543092027712,"point_name":"w","color_group":"C"},
+{"x":0.00253715486503151,"y":0.031150594182891,"point_name":"x","color_group":"C"},
+{"x":0.244312579811137,"y":0.00786091219103131,"point_name":"k","color_group":"C"},
+{"x":0.171847746658579,"y":0.0482860003789478,"point_name":"v","color_group":"C"},
+{"x":0.340657972355384,"y":0.0205447756834975,"point_name":"q","color_group":"C"},
+{"x":0.100987342403834,"y":0.131917815908374,"point_name":"m","color_group":"C"},
+{"x":0.0456492329474757,"y":0.014757868844161,"point_name":"h","color_group":"C"},
+{"x":0.0560013148526649,"y":0.0678753066336853,"point_name":"a","color_group":"C"},
+{"x":0.00400147187925569,"y":0.0379921614739268,"point_name":"v","color_group":"C"},
+{"x":0.0289335312168007,"y":0.0326265248949927,"point_name":"j","color_group":"C"},
+{"x":0.0804257071480306,"y":0.0500230387670126,"point_name":"p","color_group":"C"},
+{"x":0.119269543622184,"y":0.0912387651957179,"point_name":"g","color_group":"C"},
+{"x":0.0422022712067513,"y":0.0194967410612461,"point_name":"i","color_group":"C"},
+{"x":0.0782539843076464,"y":0.113129241798882,"point_name":"o","color_group":"C"},
+{"x":0.101500210070582,"y":0.094389094761412,"point_name":"t","color_group":"C"},
+{"x":0.0341879782900717,"y":0.0618327125818436,"point_name":"t","color_group":"C"},
+{"x":0.0468277803241781,"y":0.0538668322692702,"point_name":"j","color_group":"C"},
+{"x":0.083278022793716,"y":0.0441213621394056,"point_name":"k","color_group":"C"},
+{"x":0.0557922416889273,"y":0.0220426496373294,"point_name":"l","color_group":"C"},
+{"x":0.22630844388364,"y":0.045726403395083,"point_name":"t","color_group":"C"},
+{"x":0.041801357620813,"y":0.0409385075437821,"point_name":"l","color_group":"C"},
+{"x":0.0848878284267765,"y":0.20832305014226,"point_name":"a","color_group":"C"},
+{"x":0.228154791926773,"y":0.26666247149559,"point_name":"i","color_group":"C"},
+{"x":0.0417593881292587,"y":0.0287643455876564,"point_name":"l","color_group":"C"},
+{"x":0.103870975995634,"y":0.0425572893889841,"point_name":"r","color_group":"C"},
+{"x":0.00810439360775671,"y":0.0980959834291295,"point_name":"c","color_group":"C"},
+{"x":0.113278719124013,"y":0.108036134855698,"point_name":"m","color_group":"C"},
+{"x":0.102347560303573,"y":0.0547133921277808,"point_name":"i","color_group":"C"},
+{"x":0.00119762714836224,"y":0.0287886911083853,"point_name":"q","color_group":"C"},
+{"x":0.00981273282211898,"y":0.0167378575531257,"point_name":"s","color_group":"C"},
+{"x":0.0574787570461537,"y":0.0911690965507053,"point_name":"c","color_group":"C"},
+{"x":0.0409951739898504,"y":0.0452080052106996,"point_name":"p","color_group":"B"},
+{"x":0.073161410068931,"y":0.217455040716917,"point_name":"l","color_group":"B"},
+{"x":0.0621333706938827,"y":0.115564405463656,"point_name":"u","color_group":"B"},
+{"x":0.0338719111160606,"y":0.0650819969137631,"point_name":"o","color_group":"B"},
+{"x":0.0529516677983635,"y":0.00183650296348667,"point_name":"a","color_group":"B"},
+{"x":0.188376836756845,"y":0.0106093123186606,"point_name":"x","color_group":"B"},
+{"x":0.274072112501091,"y":0.0183628435455096,"point_name":"t","color_group":"B"},
+{"x":0.101873089414924,"y":0.0436621476450829,"point_name":"q","color_group":"B"},
+{"x":0.168240839398395,"y":0.0572973891881943,"point_name":"z","color_group":"B"},
+{"x":0.253152827677161,"y":0.0842044597955841,"point_name":"g","color_group":"B"},
+{"x":0.159566298874684,"y":0.0503020321970861,"point_name":"z","color_group":"B"},
+{"x":0.0243717352797908,"y":0.0687370584678184,"point_name":"v","color_group":"B"},
+{"x":0.0706895495245021,"y":0.003195987621273,"point_name":"m","color_group":"B"},
+{"x":0.0586559055648093,"y":0.0596419423183001,"point_name":"h","color_group":"B"},
+{"x":0.0191126422944996,"y":0.0735882875984905,"point_name":"r","color_group":"B"},
+{"x":0.0229085483789156,"y":0.0282767849757856,"point_name":"n","color_group":"B"},
+{"x":0.039485181816531,"y":0.262267499891061,"point_name":"b","color_group":"B"},
+{"x":0.0117610816973338,"y":0.141452831708915,"point_name":"k","color_group":"B"},
+{"x":0.252029790298164,"y":0.00208578254026192,"point_name":"h","color_group":"B"},
+{"x":0.0776643255522888,"y":0.00149307210615578,"point_name":"l","color_group":"B"},
+{"x":0.166638541002154,"y":0.198771892478748,"point_name":"k","color_group":"B"},
+{"x":0.0742942191902775,"y":0.0210334803065147,"point_name":"d","color_group":"B"},
+{"x":0.00457356284825102,"y":0.0632003185556826,"point_name":"n","color_group":"B"},
+{"x":0.099438106353439,"y":0.105372739514418,"point_name":"x","color_group":"B"},
+{"x":0.0804537190302709,"y":0.10146746912768,"point_name":"n","color_group":"B"},
+{"x":0.0290911143426899,"y":0.116901086156013,"point_name":"e","color_group":"B"},
+{"x":0.0732642741021201,"y":0.396295360549334,"point_name":"a","color_group":"B"},
+{"x":0.0337224696893036,"y":0.13367695374488,"point_name":"z","color_group":"B"},
+{"x":0.0690834342878381,"y":0.0366733390915681,"point_name":"s","color_group":"B"},
+{"x":0.00334984867341505,"y":0.0470411843523287,"point_name":"t","color_group":"B"},
+{"x":0.0747173227908036,"y":0.0838396090755841,"point_name":"w","color_group":"B"},
+{"x":0.0148502352651616,"y":0.0104371224243944,"point_name":"t","color_group":"B"},
+{"x":0.0625475330627848,"y":0.217333914181749,"point_name":"w","color_group":"B"},
+{"x":0.197558732904762,"y":0.00321191430046782,"point_name":"z","color_group":"B"},
+{"x":0.093404517230116,"y":0.0416525550311156,"point_name":"b","color_group":"B"},
+{"x":0.015768418811249,"y":0.0822127735625772,"point_name":"h","color_group":"A"},
+{"x":0.06132625655086,"y":0.0345157254242504,"point_name":"u","color_group":"A"},
+{"x":0.143284352797646,"y":0.00564926026540778,"point_name":"h","color_group":"A"},
+{"x":0.00827966143497189,"y":0.0747307919319221,"point_name":"x","color_group":"A"},
+{"x":0.274534111075447,"y":0.015630157932354,"point_name":"u","color_group":"A"},
+{"x":0.0914658928607251,"y":0.291536505460162,"point_name":"x","color_group":"A"},
+{"x":0.0327097587064834,"y":0.056847362455582,"point_name":"i","color_group":"A"},
+{"x":0.110773691386201,"y":0.032986046575244,"point_name":"y","color_group":"A"},
+{"x":0.0816371645303664,"y":0.0237806743139874,"point_name":"j","color_group":"A"},
+{"x":0.0563599464518999,"y":0.130658981007946,"point_name":"o","color_group":"A"},
+{"x":0.121553762742237,"y":0.040145052370371,"point_name":"y","color_group":"A"},
+{"x":0.211582357166605,"y":0.0693427111448109,"point_name":"z","color_group":"A"},
+{"x":0.205029127363818,"y":0.161623451852975,"point_name":"f","color_group":"A"},
+{"x":0.178766284115623,"y":0.0293504979312617,"point_name":"u","color_group":"A"},
+{"x":0.101445314786578,"y":0.138568342280477,"point_name":"c","color_group":"A"},
+{"x":0.0539749123041411,"y":0.00545844453013903,"point_name":"e","color_group":"A"},
+{"x":0.0662563457196615,"y":0.0466916736811227,"point_name":"x","color_group":"A"},
+{"x":0.0366810572670226,"y":0.000305095771259904,"point_name":"q","color_group":"A"},
+{"x":0.00460839726928657,"y":0.0339601433718418,"point_name":"a","color_group":"A"},
+{"x":0.135025073402563,"y":0.416309043680627,"point_name":"l","color_group":"A"},
+{"x":0.348737841507671,"y":0.112913640642846,"point_name":"k","color_group":"A"},
+{"x":0.214632945709078,"y":0.0681194116105498,"point_name":"e","color_group":"A"},
+{"x":0.0333223051537282,"y":0.141653896686587,"point_name":"v","color_group":"A"},
+{"x":0.255325464723271,"y":0.19887210519965,"point_name":"s","color_group":"A"},
+{"x":0.154922923622395,"y":0.0993138173631298,"point_name":"e","color_group":"A"},
+{"x":0.0351543476679353,"y":0.148269885736292,"point_name":"g","color_group":"A"},
+{"x":0.0306481782122273,"y":0.172547467587142,"point_name":"c","color_group":"A"},
+{"x":0.159016260859579,"y":0.048633503553877,"point_name":"s","color_group":"A"},
+{"x":0.0198487876427898,"y":0.0373896237083701,"point_name":"q","color_group":"A"},
+{"x":0.101090281252663,"y":0.119578639041674,"point_name":"z","color_group":"A"}];
+
+  radius = 5;
+
+  color_scale = d3.scale.ordinal().range(["#ff7f0e","#d62728","#24A5F9"]);;
+
+  opacity = 1;
+
+  color_title = "Group";
+
+  color_legend_counts = {"A":30,"B":35,"C":35};
+
+  distance_between_show_names_and_color_groups = 80;
+
+  plot = new_plot({
+    width: 500,
+    height: 500,
+    padding: {"top":150,"right":400,"bottom":70,"left":100},
+    title: "Zoom Search Hover Click",
+    subtitle: null,
+    xlab: "x",
+    ylab: "y",
+    rotate_label: {
+      y: true
+    },
+    box: false,
+    xlim: null,
+    ylim: null,
+    data_ranges: {
+          x: [0.00119762714836224,0.409015252835207],
+          y: [0.000305095771259904,0.416309043680627]
+        },
+    categorical_domains: {
+          x: null,
+          y: null
+        },
+    jitter: 0,
+    hide_x_tick_labels: false,
+    ordinal_scale_padding: 1,
+    linear_scale_padding: 40
+  });
+
+  plot.center.append("defs").append("clipPath").attr("id", "clip").append("rect").attr({
+    "width": plot.width,
+    "height": plot.height
+  });
+
+  clip = plot.center.append("g").attr("clip-path", "url(#clip)");
+
+  if (plot.zoom) {
+    clip.append("rect").style({
+      "cursor": "move"
+    }).attr({
+      "class": "overlay",
+      "width": plot.width,
+      "height": plot.height,
+      "fill": "none",
+      "pointer-events": "all"
+    }).call(d3.behavior.zoom().x(plot.scales.x).y(plot.scales.y).scaleExtent([1, Infinity]).on("zoom", function() {
+      return redraw();
+    }));
+    redraw = function() {
+      plot.select(".x.axis").call(plot.axes.x);
+      plot.select(".y.axis").call(plot.axes.y);
+      return g_points.attr("transform", transform);
+    };
+  }
+
+  transform = function(d) {
+    return "translate(" + (plot.scales.x(d.x) + plot.jitters.x()) + ", " + (plot.scales.y(d.y) + plot.jitters.y()) + ")";
+  };
+
+  g_points = clip.selectAll(".point").data(data).enter().append("g").attr({
+    "class": "point",
+    "transform": transform
+  });
+
+  points = g_points.append("svg:circle").attr({
+    "r": radius,
+    "fill": function(d) {
+      return color_scale(d.color_group);
+    },
+    "opacity": function(d, i) {
+      return opacity;
+    },
+    "title": function(d) {
+      return "<table><tr><td colspan='2' class='tooltip-title'>" + d.point_name + "</td></tr><tr class='tooltip-metric'><td class='tooltip-metric-name'>x</td><td class='tooltip-metric-value'>" + d3.format('.2f')(d['x']) + "</td></tr><tr class='tooltip-metric'><td class='tooltip-metric-name'>y</td><td class='tooltip-metric-value'>" + d3.format('.2f')(d['y']) + "</td></tr><tr class='tooltip-metric'><td class='tooltip-metric-name'>Group</td><td class='tooltip-metric-value'>" + d['color_group'] + "</td></tr></table>";
+    }
+  });
+
+  $(".point circle").tooltip({
+    html: true,
+    container: "body",
+    placement: "top"
+  });
+
+  point_names = g_points.append("text").text(function(d) {
+    return d.point_name;
+  }).attr({
+    "dy": ".32em",
+    "dx": 8,
+    "text-anchor": "left",
+    "display": "none"
+  }).style({
+    "fill": function(d) {
+      return color_scale(d.color_group);
+    },
+    "font-size": "22px"
+  });
+
+  if (true) {
+    sidebar = plot.right_margin.append("g").attr("transform", "translate(60,0)");
+    g_toggle_names = sidebar.append("g").style("cursor", "pointer").style("font-size", "22px").on("click", function() {
+      return toggle_names();
+    });
+    g_toggle_names.append("circle").attr("r", 7).attr("stroke", "black").attr("stroke-width", 2).attr("fill", "white");
+    g_toggle_names.append("text").attr('text-anchor', 'start').attr('dy', '.32em').attr('dx', '12').text("Show names (" + data.length + ")");
+    toggle_names = function() {
+      var showing_point_names;
+      showing_point_names = g_toggle_names.classed("show_names");
+      point_names.attr("display", function() {
+        if (showing_point_names) {
+          return "none";
+        } else {
+          return "inline";
+        }
+      });
+      return g_toggle_names.attr("class", function() {
+        if (showing_point_names) {
+          return "";
+        } else {
+          return "show_names";
+        }
+      }).select("circle").attr("fill", function() {
+        if (showing_point_names) {
+          return "white";
+        } else {
+          return "black";
+        }
+      });
+    };
+    if (color_scale.range().length > 1) {
+      sidebar.append("text").attr({
+        "class": "color_title",
+        "x": -radius,
+        "y": distance_between_show_names_and_color_groups,
+        "dy": ".35em"
+      }).style({
+        "font-size": "16px",
+        "font-weight": "bold"
+      }).text(color_title);
+      g_color_group_keys = sidebar.selectAll(".color_group_key").data(color_scale.domain().reverse()).enter().append("g").attr({
+        "transform": function(d, i) {
+          return "translate(0, " + (i * (radius * 2 + 15) + distance_between_show_names_and_color_groups + 30) + ")";
+        },
+        "class": "color_group_key"
+      }).style("cursor", "pointer");
+      g_color_group_keys.append("circle").attr({
+        "r": radius,
+        "fill": color_scale
+      }).on("click", function(d) {
+        return toggle_points(d);
+      });
+      g_color_group_keys.append("text").attr({
+        "x": radius + 10,
+        "y": 0,
+        "dy": ".35em"
+      }).text(function(d) {
+        return "" + d + " (" + color_legend_counts[d] + ")";
+      }).on("click", function(d) {
+        return toggle_points(d);
+      });
+    }
+  }
+
+  toggle_points = function(category) {
+    g_points.filter(function(d) {
+      return d.color_group === category;
+    }).classed("hide", function() {
+      return !d3.select(this).classed("hide");
+    });
+    g_color_group_keys.filter(function(d) {
+      return d === category;
+    }).classed("hide", function() {
+      return !d3.select(this).classed("hide");
+    });
+    if (g_points.filter(":not(.hide)")[0].length === 0) {
+      g_color_group_keys.classed("hide", false);
+      return g_points.classed("hide", false);
+    }
+  };
+
+  d3.select(".g-search").style({
+    "top": "" + (g_toggle_names.node().getBoundingClientRect().top + distance_between_show_names_and_color_groups / 2) + "px",
+    "left": "" + (g_toggle_names.node().getBoundingClientRect().left) + "px"
+  });
+
+  keyuped = function() {
+    if (d3.event.keyCode === 27) {
+      this.value = "";
+    }
+    return search(this.value.trim());
+  };
+
+  search = function(value) {
+    var matches, re;
+    if (value) {
+      console.log(d3.requote(value));
+      re = new RegExp("" + (d3.requote(value)), "i");
+      clip.classed("g-searching", true);
+      if (sidebar.selectAll(".color_group_key").size() > 0) {
+        g_color_group_keys.classed("hide", false);
+        g_points.classed("hide", false);
+      }
+      g_points.classed("g-match", function(d) {
+        return re.test(d.point_name);
+      });
+      matches = d3.selectAll(".g-match");
+      if (matches[0].length === 1) {
+        mouseover(matches.datum());
+      } else {
+        mouseout();
+      }
+      return search_clear.style("display", null);
+    } else {
+      mouseout();
+      clip.classed("g-searching", false);
+      g_points.classed("g-match", false);
+      return search_clear.style("display", "none");
+    }
+  };
+
+  mouseover = function(d) {
+    points.filter(function(c) {
+      return c === d;
+    }).classed("g-active", true);
+    return $(".g-active").tooltip("show");
+  };
+
+  mouseout = function() {
+    $(".g-active").tooltip("hide");
+    return points.filter(".g-active").classed("g-active", false);
+  };
+
+  search_input = d3.select(".g-search input").on("keyup", keyuped);
+
+  search_clear = d3.select(".g-search .g-search-clear").on("click", function() {
+    search_input.property("value", "");
+    return search();
+  });
+
+}).call(this);
+
+
+    </script>
+  </body>
+</html>
