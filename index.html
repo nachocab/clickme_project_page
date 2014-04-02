@@ -49,16 +49,18 @@ library(clickme)
         <h3>Use</h3>
 
     <pre><code># simple
-clickme(points, 1:10)
+clickme("points", 1:10)
 
 # fancy
 n <- 500
-clickme(points,
+clickme("points",
     x = rbeta(n, 1, 10), y = rbeta(n, 1, 10),
     names = sample(letters, n, r = T),
     color_groups = sample(LETTERS[1:3], n, r = T),
     title = "Zoom Search Hover Click")
 </code></pre>
+
+<strong><a href="clickme/user_manual/points.html">Reference guide for points</a></strong>
 
         </section>
 

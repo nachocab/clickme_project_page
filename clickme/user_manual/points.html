@@ -277,7 +277,7 @@ p img{
 
 <p>The following is a list of the parameters that can be used with the Points template. The <code>clickme</code> function returns the generated object, which can be used to see the default value of the parameters.</p>
 
-<pre><code class="r">p &lt;- clickme(points, 1:10)
+<pre><code class="r">p &lt;- clickme(&quot;points&quot;, 1:10)
 p$params # to see the list of parameters
 p # to show the plot
 </code></pre>
@@ -288,11 +288,11 @@ p # to show the plot
 
 <p>The values to be plotted. <code>x</code> and <code>y</code> can be almost every combination of vectors, lists, dataframes and matrices. If <code>y</code> is not specified and <code>x</code> is a dataframe or a matrix, the first column is used as x and the second as y.</p>
 
-<pre><code class="r">clickme(points, x = 1:10, y = 1:10) # x and y are numeric vectors
+<pre><code class="r">clickme(&quot;points&quot;, x = 1:10, y = 1:10) # x and y are numeric vectors
 
-clickme(points, x = data.frame(a = letters[1:10], b = 1:10)) # x is a data frame with two columns and y is null
+clickme(&quot;points&quot;, x = data.frame(a = letters[1:10], b = 1:10)) # x is a data frame with two columns and y is null
 
-clickme(points, x = letters[1:3], y = data.frame(&quot;A&quot; = 1:10, &quot;B&quot; = 11:20, &quot;C&quot; = 21:30)) # x is a character vector and y is a data frame with as many numeric columns as elements in x
+clickme(&quot;points&quot;, x = letters[1:3], y = data.frame(&quot;A&quot; = 1:10, &quot;B&quot; = 11:20, &quot;C&quot; = 21:30)) # x is a character vector and y is a data frame with as many numeric columns as elements in x
 </code></pre>
 
 <h2>Color</h2>
@@ -301,9 +301,9 @@ clickme(points, x = letters[1:3], y = data.frame(&quot;A&quot; = 1:10, &quot;B&q
 
 <p>A character vector of the same length as <code>x</code>. Each unique value will be plotted with a different color. If <code>color_groups</code> is a factor, its levels are used to determine the order in which each color group is plotted.</p>
 
-<pre><code class="r">clickme(points, 1:10, color_groups = rep(c(&quot;a&quot;, &quot;b&quot;), 5)) # color_groups is a character vector
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, color_groups = rep(c(&quot;a&quot;, &quot;b&quot;), 5)) # color_groups is a character vector
 
-clickme(points, 1:10, color_groups = factor(rep(c(&quot;a&quot;, &quot;b&quot;), 5), levels = c(&quot;b&quot;, &quot;a&quot;))) # color_groups is a factor
+clickme(&quot;points&quot;, 1:10, color_groups = factor(rep(c(&quot;a&quot;, &quot;b&quot;), 5), levels = c(&quot;b&quot;, &quot;a&quot;))) # color_groups is a factor
 </code></pre>
 
 <h3>palette</h3>
@@ -312,10 +312,10 @@ clickme(points, 1:10, color_groups = factor(rep(c(&quot;a&quot;, &quot;b&quot;),
 
 <p>Colors can be specified in a variety of formats (&quot;#ffeeaa&quot;, &quot;rgb(255,255,255)&quot;, &quot;hsl(120,50%,20%)&quot;, &quot;blue&quot;, see the full list <a href="http://www.w3.org/TR/SVG/types.html#ColorKeywords">here</a>).</p>
 
-<pre><code class="r">clickme(points, 1:9, palette = c(b = &quot;orange&quot;, a = &quot;hsl(120,50%,20%)&quot;, c = &quot;#000&quot;),
+<pre><code class="r">clickme(&quot;points&quot;, 1:9, palette = c(b = &quot;orange&quot;, a = &quot;hsl(120,50%,20%)&quot;, c = &quot;#000&quot;),
         color_groups = rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 3)) # the names of the palette determine the order of the colors
 
-clickme(points, 1:9, palette = c(a = &quot;orange&quot;, c = &quot;#000&quot;),
+clickme(&quot;points&quot;, 1:9, palette = c(a = &quot;orange&quot;, c = &quot;#000&quot;),
         color_groups = rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 3)) # partial palette, not every group is specified
 </code></pre>
 
@@ -323,10 +323,10 @@ clickme(points, 1:9, palette = c(a = &quot;orange&quot;, c = &quot;#000&quot;),
 
 <p>A character vector specifying the order of the color groups. Not every color group needs to be specified.</p>
 
-<pre><code class="r">clickme(points, 1:9, color_group_order = c(&quot;b&quot;, &quot;c&quot;, &quot;a&quot;),
+<pre><code class="r">clickme(&quot;points&quot;, 1:9, color_group_order = c(&quot;b&quot;, &quot;c&quot;, &quot;a&quot;),
         color_groups = rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 3))
 
-clickme(points, 1:9, color_group_order = c(&quot;a&quot;, &quot;c&quot;),
+clickme(&quot;points&quot;, 1:9, color_group_order = c(&quot;a&quot;, &quot;c&quot;),
         color_groups = rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), 3)) # partial color_group_order, not every group is specified
 </code></pre>
 
@@ -336,23 +336,23 @@ clickme(points, 1:9, color_group_order = c(&quot;a&quot;, &quot;c&quot;),
 
 <p>A character vector specifying the names of each point (which will be shown on hover and used in the search bar). If the input object is a named vector, a matrix with row names, or a dataframe, the names are inferred.</p>
 
-<pre><code class="r">clickme(points, 1:10, names = letters[1:10]) # names explicitly specified
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, names = letters[1:10]) # names explicitly specified
 
-clickme(points, setNames(1:10, letters[1:10])) # names inferred from x
+clickme(&quot;points&quot;, setNames(1:10, letters[1:10])) # names inferred from x
 </code></pre>
 
 <h3>extra</h3>
 
 <p>A list of extra information to show in the tooltip.</p>
 
-<pre><code class="r">clickme(points, 1:10, extra = list(&quot;Lower case&quot; = letters[1:10], &quot;Upper case&quot; = LETTERS[1:10]))
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, extra = list(&quot;Lower case&quot; = letters[1:10], &quot;Upper case&quot; = LETTERS[1:10]))
 </code></pre>
 
 <h3>formats</h3>
 
 <p>A list specifying how to format each number element in the tooltip. See <a href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">here</a> for a full reference</p>
 
-<pre><code class="r">clickme(points, formats = list(x = &quot;$.1f&quot;, y = &quot;%.2f&quot;, rate = &quot;.4f&quot;),
+<pre><code class="r">clickme(&quot;points&quot;, formats = list(x = &quot;$.1f&quot;, y = &quot;%.2f&quot;, rate = &quot;.4f&quot;),
         x = rnorm(10, mean = 100), y = rnorm(10),
         xlab = &quot;Price&quot;, ylab = &quot;Percentage&quot;,
         extra = list(rate = rnorm(10)))
@@ -370,7 +370,7 @@ clickme(points, setNames(1:10, letters[1:10])) # names inferred from x
 
 <h3>color_title</h3>
 
-<pre><code class="r">clickme(points, 1:10,
+<pre><code class="r">clickme(&quot;points&quot;, 1:10,
         title = &quot;The main title&quot;, subtitle = &quot;The subtitle&quot;,
         xlab = &quot;The x axis label&quot;, ylab = &quot;The y axis label&quot;,
         color_title = &quot;The color title&quot;,
@@ -383,26 +383,26 @@ clickme(points, setNames(1:10, letters[1:10])) # names inferred from x
 
 <p>A value from 0 (transparent) to 1 (opaque) which determines the opacity of the points.</p>
 
-<pre><code class="r">clickme(points, rnorm(100), opacity = .8) # somewhat transparent
+<pre><code class="r">clickme(&quot;points&quot;, rnorm(100), opacity = .8) # somewhat transparent
 
-clickme(points, rnorm(100), opacity = .4) # very transparent
+clickme(&quot;points&quot;, rnorm(100), opacity = .4) # very transparent
 </code></pre>
 
 <h3>radius</h3>
 
 <p>A number setting the radius of the points (in pixels).</p>
 
-<pre><code class="r">clickme(points, 1:10, radius = 10)
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, radius = 10)
 </code></pre>
 
 <h3>jitter</h3>
 
 <p>A number from 0 to 1 indicating the amount of horizontal jitter to apply when x is not numeric.</p>
 
-<pre><code class="r">clickme(points, jitter = 0,
+<pre><code class="r">clickme(&quot;points&quot;, jitter = 0,
         x = letters[1:3], y = data.frame(&quot;A&quot; = rnorm(10), &quot;B&quot; = rnorm(10), &quot;C&quot; = rnorm(10))) # no jitter
 
-clickme(points, jitter = 0.2,
+clickme(&quot;points&quot;, jitter = 0.2,
         x = letters[1:3], y = data.frame(&quot;A&quot; = rnorm(10), &quot;B&quot; = rnorm(10), &quot;C&quot; = rnorm(10))) # some jitter
 </code></pre>
 
@@ -412,7 +412,7 @@ clickme(points, jitter = 0.2,
 
 <p>A two-element vector indicating the plotting limits.</p>
 
-<pre><code class="r">clickme(points, xlim = c(2,6), ylim = c(2, 6),
+<pre><code class="r">clickme(&quot;points&quot;, xlim = c(2,6), ylim = c(2, 6),
         x =  1:10, y = 1:10)
 </code></pre>
 
@@ -424,14 +424,14 @@ clickme(points, jitter = 0.2,
 
 <p>Number of pixels of the plotting area, not counting the margins.</p>
 
-<pre><code class="r">clickme(points, 1:10, height = 400, width = 400)
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, height = 400, width = 400)
 </code></pre>
 
 <h3>padding</h3>
 
 <p>List specifying the number of pixels in each direction (top, right, bottom, left). Not every direction needs to be specified.</p>
 
-<pre><code class="r">clickme(points, 1:10, 1e7:(1e7 + 9), padding = list(left = 150))
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, 1e7:(1e7 + 9), padding = list(left = 150))
 </code></pre>
 
 <h2>Output</h2>
@@ -444,47 +444,47 @@ clickme(points, jitter = 0.2,
 
 <p>Specify where the visualization is created.</p>
 
-<pre><code class="r">clickme(points, 1:10, dir = &quot;some/path&quot;) # generates some/path/temp-Points.html
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, dir = &quot;some/path&quot;) # generates some/path/temp-Points.html
 
-clickme(points, 1:10, file = &quot;some_file_name.html&quot;) # generates some_file_name.html in the current working directory
+clickme(&quot;points&quot;, 1:10, file = &quot;some_file_name.html&quot;) # generates some_file_name.html in the current working directory
 
-clickme(points, 1:10, file = &quot;some/path/some_file_name.html&quot;) # generates some/path/some_file_name.html
+clickme(&quot;points&quot;, 1:10, file = &quot;some/path/some_file_name.html&quot;) # generates some/path/some_file_name.html
 </code></pre>
 
 <h2>Functions</h2>
 
 <p>Multiple functions can be called simultaneously.</p>
 
-<pre><code class="r">clickme(points, 1:10)$hide()$link()$iframe()
+<pre><code class="r">clickme(&quot;points&quot;, 1:10)$hide()$link()$iframe()
 </code></pre>
 
 <h3>hide()</h3>
 
 <p>Prevents tabs from opening.</p>
 
-<pre><code class="r">clickme(points, 1:10)$hide() # the output file is generated, but no browser tab is opened.
+<pre><code class="r">clickme(&quot;points&quot;, 1:10)$hide() # the output file is generated, but no browser tab is opened.
 </code></pre>
 
 <h3>link(text = params$title, class = &quot;clickme&quot;, relative_path = NULL)</h3>
 
 <p>It prints a link. The text, the CSS class, and the relative path can be specified.</p>
 
-<pre><code class="r">clickme(points, 1:10)$link()
+<pre><code class="r">clickme(&quot;points&quot;, 1:10)$link()
 # &lt;a href=&quot;temp-Points.html&quot; class=&quot;clickme&quot;&gt;Points&lt;/a&gt;
 
-clickme(points, 1:10)$link(&quot;Link to my example&quot;, class = &quot;my_link&quot;)
+clickme(&quot;points&quot;, 1:10)$link(&quot;Link to my example&quot;, class = &quot;my_link&quot;)
 # &lt;a href=&quot;temp-Points.html&quot; class=&quot;my_link&quot;&gt;Link to my example&lt;/a&gt;
 
-clickme(points, 1:10)$link(&quot;Link to my example&quot;, class = &quot;my_link&quot;, relative_path = &quot;some/path&quot;)
+clickme(&quot;points&quot;, 1:10)$link(&quot;Link to my example&quot;, class = &quot;my_link&quot;, relative_path = &quot;some/path&quot;)
 # &lt;a href=&quot;some/path/temp-Points.html&quot; class=&quot;my_link&quot;&gt;Link to my example&lt;/a&gt;
 </code></pre>
 
 <h3>iframe(width, height, relative_path = NULL)</h3>
 
-<pre><code class="r">clickme(points, 1:10)$iframe()
+<pre><code class="r">clickme(&quot;points&quot;, 1:10)$iframe()
 # &lt;iframe width = &quot;1000&quot; height = &quot;724&quot; src=&quot;temp-Points.html&quot;&gt; &lt;/iframe&gt;
 
-clickme(points, 1:10)$iframe(width = 2000, relative_path = &quot;some/path&quot;)
+clickme(&quot;points&quot;, 1:10)$iframe(width = 2000, relative_path = &quot;some/path&quot;)
 # &lt;iframe width = &quot;2000&quot; height = &quot;724&quot; src=&quot;some/path/temp-Points.html&quot;&gt; &lt;/iframe&gt;
 </code></pre>
 
@@ -526,3 +526,4 @@ clickme(points, 1:10)$iframe(width = 2000, relative_path = &quot;some/path&quot;
 </body>
 
 </html>
+

@@ -11,7 +11,7 @@
 The following is a list of the parameters that can be used with the Points template. The `clickme` function returns the generated object, which can be used to see the default value of the parameters.
 
 ```r
-p <- clickme(points, 1:10)
+p <- clickme("points", 1:10)
 p$params # to see the list of parameters
 p # to show the plot
 ```
@@ -23,11 +23,11 @@ p # to show the plot
 The values to be plotted. `x` and `y` can be almost every combination of vectors, lists, dataframes and matrices. If `y` is not specified and `x` is a dataframe or a matrix, the first column is used as x and the second as y.
 
 ```r
-clickme(points, x = 1:10, y = 1:10) # x and y are numeric vectors
+clickme("points", x = 1:10, y = 1:10) # x and y are numeric vectors
 
-clickme(points, x = data.frame(a = letters[1:10], b = 1:10)) # x is a data frame with two columns and y is null
+clickme("points", x = data.frame(a = letters[1:10], b = 1:10)) # x is a data frame with two columns and y is null
 
-clickme(points, x = letters[1:3], y = data.frame("A" = 1:10, "B" = 11:20, "C" = 21:30)) # x is a character vector and y is a data frame with as many numeric columns as elements in x
+clickme("points", x = letters[1:3], y = data.frame("A" = 1:10, "B" = 11:20, "C" = 21:30)) # x is a character vector and y is a data frame with as many numeric columns as elements in x
 ```
 
 ## Color
@@ -37,9 +37,9 @@ clickme(points, x = letters[1:3], y = data.frame("A" = 1:10, "B" = 11:20, "C" = 
 A character vector of the same length as `x`. Each unique value will be plotted with a different color. If `color_groups` is a factor, its levels are used to determine the order in which each color group is plotted.
 
 ```r
-clickme(points, 1:10, color_groups = rep(c("a", "b"), 5)) # color_groups is a character vector
+clickme("points", 1:10, color_groups = rep(c("a", "b"), 5)) # color_groups is a character vector
 
-clickme(points, 1:10, color_groups = factor(rep(c("a", "b"), 5), levels = c("b", "a"))) # color_groups is a factor
+clickme("points", 1:10, color_groups = factor(rep(c("a", "b"), 5), levels = c("b", "a"))) # color_groups is a factor
 ```
 
 ### palette
@@ -49,10 +49,10 @@ A named character vector indicating what colors to use for each color group. The
 Colors can be specified in a variety of formats ("#ffeeaa", "rgb(255,255,255)", "hsl(120,50%,20%)", "blue", see the full list [here](http://www.w3.org/TR/SVG/types.html#ColorKeywords)).
 
 ```r
-clickme(points, 1:9, palette = c(b = "orange", a = "hsl(120,50%,20%)", c = "#000"),
+clickme("points", 1:9, palette = c(b = "orange", a = "hsl(120,50%,20%)", c = "#000"),
         color_groups = rep(c("a", "b", "c"), 3)) # the names of the palette determine the order of the colors
 
-clickme(points, 1:9, palette = c(a = "orange", c = "#000"),
+clickme("points", 1:9, palette = c(a = "orange", c = "#000"),
         color_groups = rep(c("a", "b", "c"), 3)) # partial palette, not every group is specified
 ```
 
@@ -61,10 +61,10 @@ clickme(points, 1:9, palette = c(a = "orange", c = "#000"),
 A character vector specifying the order of the color groups. Not every color group needs to be specified.
 
 ```r
-clickme(points, 1:9, color_group_order = c("b", "c", "a"),
+clickme("points", 1:9, color_group_order = c("b", "c", "a"),
         color_groups = rep(c("a", "b", "c"), 3))
 
-clickme(points, 1:9, color_group_order = c("a", "c"),
+clickme("points", 1:9, color_group_order = c("a", "c"),
         color_groups = rep(c("a", "b", "c"), 3)) # partial color_group_order, not every group is specified
 ```
 
@@ -75,9 +75,9 @@ clickme(points, 1:9, color_group_order = c("a", "c"),
 A character vector specifying the names of each point (which will be shown on hover and used in the search bar). If the input object is a named vector, a matrix with row names, or a dataframe, the names are inferred.
 
 ```r
-clickme(points, 1:10, names = letters[1:10]) # names explicitly specified
+clickme("points", 1:10, names = letters[1:10]) # names explicitly specified
 
-clickme(points, setNames(1:10, letters[1:10])) # names inferred from x
+clickme("points", setNames(1:10, letters[1:10])) # names inferred from x
 ```
 
 ### extra
@@ -85,7 +85,7 @@ clickme(points, setNames(1:10, letters[1:10])) # names inferred from x
 A list of extra information to show in the tooltip.
 
 ```r
-clickme(points, 1:10, extra = list("Lower case" = letters[1:10], "Upper case" = LETTERS[1:10]))
+clickme("points", 1:10, extra = list("Lower case" = letters[1:10], "Upper case" = LETTERS[1:10]))
 ```
 
 
@@ -94,7 +94,7 @@ clickme(points, 1:10, extra = list("Lower case" = letters[1:10], "Upper case" = 
 A list specifying how to format each number element in the tooltip. See [here](https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format) for a full reference
 
 ```r
-clickme(points, formats = list(x = "$.1f", y = "%.2f", rate = ".4f"),
+clickme("points", formats = list(x = "$.1f", y = "%.2f", rate = ".4f"),
         x = rnorm(10, mean = 100), y = rnorm(10),
         xlab = "Price", ylab = "Percentage",
         extra = list(rate = rnorm(10)))
@@ -110,7 +110,7 @@ clickme(points, formats = list(x = "$.1f", y = "%.2f", rate = ".4f"),
 ### color_title
 
 ```r
-clickme(points, 1:10,
+clickme("points", 1:10,
         title = "The main title", subtitle = "The subtitle",
         xlab = "The x axis label", ylab = "The y axis label",
         color_title = "The color title",
@@ -122,26 +122,26 @@ clickme(points, 1:10,
 A value from 0 (transparent) to 1 (opaque) which determines the opacity of the points.
 
 ```r
-clickme(points, rnorm(100), opacity = .8) # somewhat transparent
+clickme("points", rnorm(100), opacity = .8) # somewhat transparent
 
-clickme(points, rnorm(100), opacity = .4) # very transparent
+clickme("points", rnorm(100), opacity = .4) # very transparent
 ```
 
 ### radius
 A number setting the radius of the points (in pixels).
 
 ```r
-clickme(points, 1:10, radius = 10)
+clickme("points", 1:10, radius = 10)
 ```
 
 ### jitter
 A number from 0 to 1 indicating the amount of horizontal jitter to apply when x is not numeric.
 
 ```r
-clickme(points, jitter = 0,
+clickme("points", jitter = 0,
         x = letters[1:3], y = data.frame("A" = rnorm(10), "B" = rnorm(10), "C" = rnorm(10))) # no jitter
 
-clickme(points, jitter = 0.2,
+clickme("points", jitter = 0.2,
         x = letters[1:3], y = data.frame("A" = rnorm(10), "B" = rnorm(10), "C" = rnorm(10))) # some jitter
 ```
 
@@ -150,7 +150,7 @@ clickme(points, jitter = 0.2,
 A two-element vector indicating the plotting limits.
 
 ```r
-clickme(points, xlim = c(2,6), ylim = c(2, 6),
+clickme("points", xlim = c(2,6), ylim = c(2, 6),
         x =  1:10, y = 1:10)
 ```
 
@@ -160,7 +160,7 @@ clickme(points, xlim = c(2,6), ylim = c(2, 6),
 Number of pixels of the plotting area, not counting the margins.
 
 ```r
-clickme(points, 1:10, height = 400, width = 400)
+clickme("points", 1:10, height = 400, width = 400)
 ```
 
 ### padding
@@ -168,7 +168,7 @@ clickme(points, 1:10, height = 400, width = 400)
 List specifying the number of pixels in each direction (top, right, bottom, left). Not every direction needs to be specified.
 
 ```r
-clickme(points, 1:10, 1e7:(1e7 + 9), padding = list(left = 150))
+clickme("points", 1:10, 1e7:(1e7 + 9), padding = list(left = 150))
 ```
 
 ## Output
@@ -178,11 +178,11 @@ clickme(points, 1:10, 1e7:(1e7 + 9), padding = list(left = 150))
 Specify where the visualization is created.
 
 ```r
-clickme(points, 1:10, dir = "some/path") # generates some/path/temp-Points.html
+clickme("points", 1:10, dir = "some/path") # generates some/path/temp-Points.html
 
-clickme(points, 1:10, file = "some_file_name.html") # generates some_file_name.html in the current working directory
+clickme("points", 1:10, file = "some_file_name.html") # generates some_file_name.html in the current working directory
 
-clickme(points, 1:10, file = "some/path/some_file_name.html") # generates some/path/some_file_name.html
+clickme("points", 1:10, file = "some/path/some_file_name.html") # generates some/path/some_file_name.html
 ```
 
 
@@ -191,37 +191,37 @@ clickme(points, 1:10, file = "some/path/some_file_name.html") # generates some/p
 Multiple functions can be called simultaneously.
 
 ```r
-clickme(points, 1:10)$hide()$link()$iframe()
+clickme("points", 1:10)$hide()$link()$iframe()
 ```
 
 ### hide()
 Prevents tabs from opening.
 
 ```r
-clickme(points, 1:10)$hide() # the output file is generated, but no browser tab is opened.
+clickme("points", 1:10)$hide() # the output file is generated, but no browser tab is opened.
 ```
 
 ### link(text = params$title, class = "clickme", relative_path = NULL)
 It prints a link. The text, the CSS class, and the relative path can be specified.
 
 ```r
-clickme(points, 1:10)$link()
+clickme("points", 1:10)$link()
 # <a href="temp-Points.html" class="clickme">Points</a>
 
-clickme(points, 1:10)$link("Link to my example", class = "my_link")
+clickme("points", 1:10)$link("Link to my example", class = "my_link")
 # <a href="temp-Points.html" class="my_link">Link to my example</a>
 
-clickme(points, 1:10)$link("Link to my example", class = "my_link", relative_path = "some/path")
+clickme("points", 1:10)$link("Link to my example", class = "my_link", relative_path = "some/path")
 # <a href="some/path/temp-Points.html" class="my_link">Link to my example</a>
 ```
 
 ### iframe(width, height, relative_path = NULL)
 
 ```r
-clickme(points, 1:10)$iframe()
+clickme("points", 1:10)$iframe()
 # <iframe width = "1000" height = "724" src="temp-Points.html"> </iframe>
 
-clickme(points, 1:10)$iframe(width = 2000, relative_path = "some/path")
+clickme("points", 1:10)$iframe(width = 2000, relative_path = "some/path")
 # <iframe width = "2000" height = "724" src="some/path/temp-Points.html"> </iframe>
 ```
 
