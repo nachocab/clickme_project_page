@@ -173,16 +173,16 @@ clickme("points", 1:10, 1e7:(1e7 + 9), padding = list(left = 150))
 
 ## Output
 ### dir
-### file
+### file_name
 ### file_path
 Specify where the visualization is created.
 
 ```r
 clickme("points", 1:10, dir = "some/path") # generates some/path/temp-Points.html
 
-clickme("points", 1:10, file = "some_file_name.html") # generates some_file_name.html in the current working directory
+clickme("points", 1:10, file_name = "some_file_name.html") # generates some_file_name.html in the current working directory
 
-clickme("points", 1:10, file = "some/path/some_file_name.html") # generates some/path/some_file_name.html
+clickme("points", 1:10, file_name = "some/path/some_file_name.html") # generates some/path/some_file_name.html
 ```
 
 
