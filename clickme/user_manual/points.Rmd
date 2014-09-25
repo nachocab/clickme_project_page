@@ -182,7 +182,7 @@ clickme("points", 1:10, dir = "some/path") # generates some/path/temp-Points.htm
 
 clickme("points", 1:10, file_name = "some_file_name.html") # generates some_file_name.html in the current working directory
 
-clickme("points", 1:10, file_name = "some/path/some_file_name.html") # generates some/path/some_file_name.html
+clickme("points", 1:10, file_path = "some/path/some_file_name.html") # generates some/path/some_file_name.html
 ```
 
 
