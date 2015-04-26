@@ -89,22 +89,23 @@ clickme("points", 1:10, extra = list("Lower case" = letters[1:10], "Upper case" 
 ```
 
 
-### formats
+### x_format
+### y_format
 
 A list specifying how to format each number element in the tooltip. See [here](https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format) for a full reference
 
 ```r
-clickme("points", formats = list(x = "$.1f", y = "%.2f", rate = ".4f"),
+clickme("points", y_format = list(x = "$.1f", y = "%.2f", rate = ".4f"),
         x = rnorm(10, mean = 100), y = rnorm(10),
-        xlab = "Price", ylab = "Percentage",
+        x_title = "Price", y_title = "Percentage",
         extra = list(rate = rnorm(10)))
 ```
 
 
 ## Labels and titles
 
-### xlab
-### ylab
+### x_title
+### y_title
 ### title
 ### subtitle
 ### color_title
@@ -112,7 +113,7 @@ clickme("points", formats = list(x = "$.1f", y = "%.2f", rate = ".4f"),
 ```r
 clickme("points", 1:10,
         title = "The main title", subtitle = "The subtitle",
-        xlab = "The x axis label", ylab = "The y axis label",
+        x_title = "The x axis label", y_title = "The y axis label",
         color_title = "The color title",
         color_groups = rep(c("a", "b"), 5))
 ```
@@ -134,33 +135,74 @@ A number setting the radius of the points (in pixels).
 clickme("points", 1:10, radius = 10)
 ```
 
-### jitter
-A number from 0 to 1 indicating the amount of horizontal jitter to apply when x is not numeric.
+### x_jitter
+### y_jitter
+A number from 0 to 1 indicating the amount of x or y jitter to apply when x or y are categorical (not numeric).
 
 ```r
-clickme("points", jitter = 0,
+clickme("points", x_jitter = 0,
         x = letters[1:3], y = data.frame("A" = rnorm(10), "B" = rnorm(10), "C" = rnorm(10))) # no jitter
 
-clickme("points", jitter = 0.2,
+clickme("points", x_jitter = 0.2,
         x = letters[1:3], y = data.frame("A" = rnorm(10), "B" = rnorm(10), "C" = rnorm(10))) # some jitter
 ```
 
-### xlim
-### ylim
+### y_group_jitter
+### x_group_jitter
+### x_jitter_type
+### y_jitter_type
+A way to specify the size of jitter bands by group.
+
+```r
+cg <- sample(c("a", "b", "c"),100, rep = T)
+x <- sample(c("a", "b", "c"),100, rep = T)
+y <- rnorm(100)
+clickme("points", x, y , color_groups = factor(cg, levels = c("b", "a", "c")),
+        x_jitter_type = "grouped",
+        y_format = ".2s",
+        x_group_jitter = .3, x_jitter = .1)
+
+```
+
+### x_lim
+### y_lim
 A two-element vector indicating the plotting limits.
 
 ```r
-clickme("points", xlim = c(2,6), ylim = c(2, 6),
+clickme("points", x_lim = c(2,6), y_lim = c(2, 6),
         x =  1:10, y = 1:10)
 ```
 
+## rotate_x_title
+## rotate_y_title
+## rotate_x_labels
+## rotate_y_labels
+Rotate titles and labels. It often requires changing the padding.
+
+```r
+clickme("points", c("longword", "anotherword", "hello"), 1:3,
+        y_title = "some numbers",
+        x_title = "some words",
+        rotate_x_labels = TRUE,
+        rotate_y_title = TRUE,
+        padding = list(bottom = 200))
+```
+
 ## Dimensions
-### height
 ### width
+### height
 Number of pixels of the plotting area, not counting the margins.
 
 ```r
 clickme("points", 1:10, height = 400, width = 400)
+```
+
+### out_width
+### out_height
+Number of pixels of the plotting area, counting the margins.
+
+```r
+clickme("points", 1:10, out_height = 400, out_width = 400)
 ```
 
 ### padding

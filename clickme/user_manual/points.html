@@ -348,21 +348,23 @@ clickme(&quot;points&quot;, setNames(1:10, letters[1:10])) # names inferred from
 <pre><code class="r">clickme(&quot;points&quot;, 1:10, extra = list(&quot;Lower case&quot; = letters[1:10], &quot;Upper case&quot; = LETTERS[1:10]))
 </code></pre>
 
-<h3>formats</h3>
+<h3>x_format</h3>
+
+<h3>y_format</h3>
 
 <p>A list specifying how to format each number element in the tooltip. See <a href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">here</a> for a full reference</p>
 
-<pre><code class="r">clickme(&quot;points&quot;, formats = list(x = &quot;$.1f&quot;, y = &quot;%.2f&quot;, rate = &quot;.4f&quot;),
+<pre><code class="r">clickme(&quot;points&quot;, y_format = list(x = &quot;$.1f&quot;, y = &quot;%.2f&quot;, rate = &quot;.4f&quot;),
         x = rnorm(10, mean = 100), y = rnorm(10),
-        xlab = &quot;Price&quot;, ylab = &quot;Percentage&quot;,
+        x_title = &quot;Price&quot;, y_title = &quot;Percentage&quot;,
         extra = list(rate = rnorm(10)))
 </code></pre>
 
 <h2>Labels and titles</h2>
 
-<h3>xlab</h3>
+<h3>x_title</h3>
 
-<h3>ylab</h3>
+<h3>y_title</h3>
 
 <h3>title</h3>
 
@@ -372,7 +374,7 @@ clickme(&quot;points&quot;, setNames(1:10, letters[1:10])) # names inferred from
 
 <pre><code class="r">clickme(&quot;points&quot;, 1:10,
         title = &quot;The main title&quot;, subtitle = &quot;The subtitle&quot;,
-        xlab = &quot;The x axis label&quot;, ylab = &quot;The y axis label&quot;,
+        x_title = &quot;The x axis label&quot;, y_title = &quot;The y axis label&quot;,
         color_title = &quot;The color title&quot;,
         color_groups = rep(c(&quot;a&quot;, &quot;b&quot;), 5))
 </code></pre>
@@ -395,36 +397,85 @@ clickme(&quot;points&quot;, rnorm(100), opacity = .4) # very transparent
 <pre><code class="r">clickme(&quot;points&quot;, 1:10, radius = 10)
 </code></pre>
 
-<h3>jitter</h3>
+<h3>x_jitter</h3>
 
-<p>A number from 0 to 1 indicating the amount of horizontal jitter to apply when x is not numeric.</p>
+<h3>y_jitter</h3>
 
-<pre><code class="r">clickme(&quot;points&quot;, jitter = 0,
+<p>A number from 0 to 1 indicating the amount of x or y jitter to apply when x or y are categorical (not numeric).</p>
+
+<pre><code class="r">clickme(&quot;points&quot;, x_jitter = 0,
         x = letters[1:3], y = data.frame(&quot;A&quot; = rnorm(10), &quot;B&quot; = rnorm(10), &quot;C&quot; = rnorm(10))) # no jitter
 
-clickme(&quot;points&quot;, jitter = 0.2,
+clickme(&quot;points&quot;, x_jitter = 0.2,
         x = letters[1:3], y = data.frame(&quot;A&quot; = rnorm(10), &quot;B&quot; = rnorm(10), &quot;C&quot; = rnorm(10))) # some jitter
 </code></pre>
 
-<h3>xlim</h3>
+<h3>y_group_jitter</h3>
 
-<h3>ylim</h3>
+<h3>x_group_jitter</h3>
+
+<h3>x_jitter_type</h3>
+
+<h3>y_jitter_type</h3>
+
+<p>A way to specify the size of jitter bands by group.</p>
+
+<pre><code class="r">cg &lt;- sample(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;),100, rep = T)
+x &lt;- sample(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;),100, rep = T)
+y &lt;- rnorm(100)
+clickme(&quot;points&quot;, x, y , color_groups = factor(cg, levels = c(&quot;b&quot;, &quot;a&quot;, &quot;c&quot;)),
+        x_jitter_type = &quot;grouped&quot;,
+        y_format = &quot;.2s&quot;,
+        x_group_jitter = .3, x_jitter = .1)
+
+</code></pre>
+
+<h3>x_lim</h3>
+
+<h3>y_lim</h3>
 
 <p>A two-element vector indicating the plotting limits.</p>
 
-<pre><code class="r">clickme(&quot;points&quot;, xlim = c(2,6), ylim = c(2, 6),
+<pre><code class="r">clickme(&quot;points&quot;, x_lim = c(2,6), y_lim = c(2, 6),
         x =  1:10, y = 1:10)
+</code></pre>
+
+<h2>rotate_x_title</h2>
+
+<h2>rotate_y_title</h2>
+
+<h2>rotate_x_labels</h2>
+
+<h2>rotate_y_labels</h2>
+
+<p>Rotate titles and labels. It often requires changing the padding.</p>
+
+<pre><code class="r">clickme(&quot;points&quot;, c(&quot;longword&quot;, &quot;anotherword&quot;, &quot;hello&quot;), 1:3,
+        y_title = &quot;some numbers&quot;,
+        x_title = &quot;some words&quot;,
+        rotate_x_labels = TRUE,
+        rotate_y_title = TRUE,
+        padding = list(bottom = 200))
 </code></pre>
 
 <h2>Dimensions</h2>
 
-<h3>height</h3>
-
 <h3>width</h3>
+
+<h3>height</h3>
 
 <p>Number of pixels of the plotting area, not counting the margins.</p>
 
 <pre><code class="r">clickme(&quot;points&quot;, 1:10, height = 400, width = 400)
+</code></pre>
+
+<h3>out_width</h3>
+
+<h3>out_height</h3>
+
+<p>Number of pixels of the plotting area, counting the margins.</p>
+
+<pre><code class="r">clickme(&quot;points&quot;, 1:10, out_height = 400, out_width = 400)
 </code></pre>
 
 <h3>padding</h3>
