@@ -173,10 +173,10 @@ clickme("points", x_lim = c(2,6), y_lim = c(2, 6),
         x =  1:10, y = 1:10)
 ```
 
-## rotate_x_title
-## rotate_y_title
-## rotate_x_labels
-## rotate_y_labels
+### rotate_x_title
+### rotate_y_title
+### rotate_x_labels
+### rotate_y_labels
 Rotate titles and labels. It often requires changing the padding.
 
 ```r
